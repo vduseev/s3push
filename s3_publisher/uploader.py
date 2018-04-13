@@ -1,28 +1,30 @@
 import os
 import sys
+import boto3
 import threading
 import mimetypes
 from collections import namedtuple
-
-import boto3
+from s3_publisher.connector import connect
 
 File = namedtuple('File', ['src_dir', 'rel_path'])
+
 
 class Uploader(object):
 
     def __init__(self):
-        self.name = 'uploader'
+        self.s3 = None
 
-    def connect(self, profile_name=None):
-        session = boto3.Session(profile_name)
-        # Get the service client
-        s3 = session.client('s3')
-        return s3
+    def connect(self, params):
+        self.s3 = connect('s3', params)
 
-    def upload(self, path, bucket_name):
-        files = self.list_files(path)
+    def upload(self, params):
+        if not self.s3:
+            print('You need to connect first: Uploader.connect(params)')
+            return
+
+        files = self.list_files(params['path'])
         for f in files:
-            self.upload_file(bucket_name, f)
+            self.upload_file(params['bucket'], f)
 
     def upload_file(self, bucket_name, f):
         local_path = os.path.join(f.src_dir, f.rel_path)
@@ -32,12 +34,12 @@ class Uploader(object):
             'ACL': 'public-read'
         }
         print(local_path, key, extra_args)
-        # s3.upload_file(
-            # local_path,
-            # bucket_name,
-            # key,
-            # Callback=None  # ProgressPercentage("tmp.txt")
-        # )
+        self.s3.upload_file(
+            local_path,
+            bucket_name,
+            key,
+            Callback=None  # ProgressPercentage("tmp.txt")
+        )
 
     def guess_mime_type(self, path):
         mime, _ = mimetypes.guess_type(path)

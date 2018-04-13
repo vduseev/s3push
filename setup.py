@@ -14,7 +14,7 @@ with open(path.join(here, 'README.md'), encoding='utf-8') as f:
 
 setup(
     name='s3-publisher',
-    version='0.0.1',
+    version='1.0.0b1',
     description='Upload directories to AWS S3',
     long_description=long_description,
     long_description_content_type='text/markdown',
@@ -22,7 +22,7 @@ setup(
     author='Vagiz Duseev',
     author_email='vagiz@duseev.com',
     classifiers=[
-        'Development Status :: 3 - Alpha',
+        'Development Status :: 4 - Beta',
         'Intended Audience :: Developers',
         'Topic :: Software Development :: Build Tools',
         'License :: OSI Approved :: MIT License',
@@ -30,9 +30,9 @@ setup(
     ],
     keywords='aws s3 static website deployment directories folder upload push publish',
     packages=find_packages(),
-    install_requires=['argparse'],
+    install_requires=['boto3'],
     extras_require={
-        'dev': ['twine']
+        'dev': ['twine', 'wheels']
     },
     entry_points={
         'console_scripts': [
