@@ -1,5 +1,6 @@
 # s3-publisher 
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/91264fd782414d7c8c40d7e2dbc4254a)](https://www.codacy.com/app/vagiz.d/s3-publisher?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=vduseev/s3-publisher&amp;utm_campaign=Badge_Grade) 
 [![CircleCI](https://circleci.com/gh/vduseev/s3-publisher/tree/master.svg?style=svg)](https://circleci.com/gh/vduseev/s3-publisher/tree/master)
 
 Upload whole directories or distinct files to AWS S3 using `s3publish` in command line. Extensive support for different credential sources.
