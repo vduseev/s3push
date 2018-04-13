@@ -8,7 +8,7 @@ name = "pypi"
 
 [dev-packages]
 twine = "*"
-"e1839a8" = {path = ".", editable = true}
+wheel = "*"
 
 [requires]
 python_version = "3.6"
