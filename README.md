@@ -1,5 +1,7 @@
 # s3-publisher 
 
+[![CircleCI](https://circleci.com/gh/vduseev/s3-publisher/tree/master.svg?style=svg)](https://circleci.com/gh/vduseev/s3-publisher/tree/master)
+
 Upload whole directories or distinct files to AWS S3 using `s3publish` in command line. Extensive support for different credential sources.
 
 ## Installation
