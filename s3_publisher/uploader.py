@@ -1,60 +1,78 @@
 import os
 import sys
 import boto3
-import threading
-import mimetypes
-from collections import namedtuple
-from s3_publisher.connector import connect
+import logging
 
-File = namedtuple('File', ['src_dir', 'rel_path'])
+from s3_publisher.progress import ProgressPercentage
+
+log = logging.getLogger(__file__)
 
 
-class Uploader(object):
+def upload(path, bucket, show_progress=False):
+    path = os.path.realpath(path)
+    srcdir = path if os.path.isdir(path) else os.path.dirname(path)
+    callback = None  # for progress reporting
 
-    def __init__(self):
-        self.s3 = None
+    # Measure size
+    if show_progress:
+        size = _measure(path)
+        callback = ProgressPercentage(size)
 
-    def connect(self, params):
-        self.s3 = connect('s3', params)
-
-    def upload(self, params):
-        if not self.s3:
-            print('You need to connect first: Uploader.connect(params)')
-            return
-
-        files = self.list_files(params['path'])
-        for f in files:
-            self.upload_file(params['bucket'], f)
-
-    def upload_file(self, bucket_name, f):
-        local_path = os.path.join(f.src_dir, f.rel_path)
-        key = f.rel_path
-        extra_args = { 
-            'ContentType': self.guess_mime_type(local_path),
-            'ACL': 'public-read'
-        }
-        print(local_path, key, extra_args)
-        self.s3.upload_file(
+    # Upload files to S3
+    for f in _scan(path):
+        local_path = f.path  # path of the file on the client machine
+        # Path (key) under which the file will be stored in the bucket
+        key_path = os.path.relpath(local_path, srcdir)
+        bucket.upload_file(
             local_path,
-            bucket_name,
-            key,
-            Callback=None  # ProgressPercentage("tmp.txt")
-        )
+            key_path,
+            ExtraArgs={'ACL': 'public-read'},
+            Callback=callback)
 
-    def guess_mime_type(self, path):
-        mime, _ = mimetypes.guess_type(path)
-        if mime is None:
-            mime = 'text/plain'
-        return mime
 
-    def list_files(self, path):
-        if os.path.isdir(path):
-            for subdir_path, _, files in os.walk(path):
-                for file_name in files:
-                    full_path = os.path.join(subdir_path, file_name)
-                    rel_path = os.path.relpath(full_path, path)
-                    yield File(path, rel_path)
-        elif os.path.isfile(path):
-            src_dir, file_name = os.path.split(path)
-            yield File(src_dir, file_name)
+def _measure(path):
+    size = 0
+    for f in _scan(path):
+        try:
+            size += f.stat().st_size
+        except Exception as ex:
+            continue
+    return size
+
+
+def _upload_file(path, bucket, srcdir, callback=None):
+    extra_args = { 'ACL': 'public-read' }
+    local_path = path
+    bucket_path = os.path.relpath(path, srcdir)
+
+    log.debug('uploading %s to %s:%s', local_path, bucket.name, bucket_path)
+    log.debug(bucket.upload_file(
+        local_path,
+        bucket_path,
+        ExtraArgs=extra_args,
+        Callback=callback))
+
+
+def _scan(path):
+    if os.path.isdir(path):
+        yield from _scantree(path)
+    elif os.path.isfile(path):
+        yield from _scanfile(path)
+
+
+def _scantree(path):
+    """Recursively yield DirEntry objects for given directory."""
+    for entry in os.scandir(path):
+        if entry.is_dir(follow_symlinks=False):
+            yield from _scantree(entry.path)
+        else:
+            yield entry
+
+
+def _scanfile(path):
+    "Yield DirEntry object for a single file"
+    directory, filename = os.path.split(path)
+    yield from filter(
+        lambda obj: obj.name == filename,
+        os.scandir(directory))
 

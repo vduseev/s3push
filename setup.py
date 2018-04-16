@@ -14,7 +14,7 @@ with open(path.join(here, 'README.md'), encoding='utf-8') as f:
 
 setup(
     name='s3-publisher',
-    version='1.0.0b1',
+    version='1.0.0b2',
     description='Upload directories to AWS S3',
     long_description=long_description,
     long_description_content_type='text/markdown',
