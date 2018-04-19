@@ -6,37 +6,47 @@
 
 Upload whole directories or distinct files to AWS S3 using `s3publish` in command line. Extensive support for different credential sources.
 
+## Project goal
+
+This tool facilitates painless upload of directories to AWS S3. The initial goal was to provide developers with a simple tool that allows them to upload whole directories to S3 with a minimal effort. Initial project vision also contained an option to create and configure a fresh S3-hosted website from scratch.
+
+However, the tool has been written after a very quick research and, as a result, suffered from the *"Not invented here"* syndrome. After a bit more careful research it was discovered that not only the other directory uploading tools exist, but also that there are far more superior instruments that also allow configuration of buckets and CloudFront CDN (i.e., `s3cmd`). See the rough [feature set comparison](docs/feature-set-comparison.html) in the docs.
+
+As a **project's post-mortem**, it can be concluded that a proper research must be performed prior to the start of development. For example, before developing a new library or a tool it may be very useful to make a simple feature set comparison.
+
+The project will, however, continue to exist as a demonstration of continuous delivery setup for a python package development. The environment for the project is designed to support fully automated releases and testing. 
+
 ## Installation
 
 Recommended installation method is via Pipenv:
-```
+```console
 pipenv install s3-publisher
 ```
 
 Installing via Pip instead of Pipenv:
-```
+```console
 pip install s3-publisher
 ```
 
 ## Usage
 
 **Publish a directory with default credentials**
-```
+```console
 s3publish ~/my-website/ example.com
 ```
 
 **Publish a file using default credentials**
-```
+```console
 s3publish ~/my-website/index.html example.com
 ```
 
 **Publish with provided key pair**
-```
+```console
 s3publish ~/my-website/ example.com -k XXXXXXXXXXXXXXXXXXXX -s xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 ```
 
 **Publish with saved profile by providing its name**
-```
+```console
 s3publish ~/my-website/ example.com -p my-deployment-profile
 ```
 
