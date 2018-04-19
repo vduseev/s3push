@@ -10,7 +10,7 @@ Upload whole directories or distinct files to AWS S3 using `s3publish` in comman
 
 This tool facilitates painless upload of directories to AWS S3. The initial goal was to provide developers with a simple tool that allows them to upload whole directories to S3 with a minimal effort. Initial project vision also contained an option to create and configure a fresh S3-hosted website from scratch.
 
-However, the tool has been written after a very quick research and, as a result, suffered from the *"Not invented here"* syndrome. After a bit more careful research it was discovered that not only the other directory uploading tools exist, but also that there are far more superior instruments that also allow configuration of buckets and CloudFront CDN (i.e., `s3cmd`). See the rough [feature set comparison](docs/feature-set-comparison.html) in the docs.
+However, the tool has been written after a very quick research and, as a result, suffered from the *"Not invented here"* syndrome. After a bit more careful research it was discovered that not only the other directory uploading tools exist, but also that there are far more superior instruments that also allow configuration of buckets and CloudFront CDN (i.e., `s3cmd`). See the rough [feature set comparison](docs/feature_set_comparison.pdf) in the docs.
 
 As a **project's post-mortem**, it can be concluded that a proper research must be performed prior to the start of development. For example, before developing a new library or a tool it may be very useful to make a simple feature set comparison.
 
