@@ -13,12 +13,12 @@ with open(path.join(here, 'README.md'), encoding='utf-8') as f:
     # version = version_file.read().strip()
 
 setup(
-    name='s3-publisher',
-    version='1.0.0b2',
+    name='s3push',
+    version='1.0.0b3',
     description='Upload directories to AWS S3',
     long_description=long_description,
     long_description_content_type='text/markdown',
-    url='https://github.com/vduseev/s3-publisher',
+    url='https://github.com/vduseev/s3push',
     author='Vagiz Duseev',
     author_email='vagiz@duseev.com',
     classifiers=[
@@ -36,7 +36,7 @@ setup(
     },
     entry_points={
         'console_scripts': [
-            's3publish=s3_publisher:main',
+            's3push=s3push:main',
         ]
     }
 )

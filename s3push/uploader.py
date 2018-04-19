@@ -3,7 +3,7 @@ import sys
 import boto3
 import logging
 
-from s3_publisher.progress import ProgressPercentage
+from s3push.progress import ProgressPercentage
 
 log = logging.getLogger(__file__)
 

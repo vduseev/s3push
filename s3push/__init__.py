@@ -1,9 +1,9 @@
 import logging
 import argparse
 
-from s3_publisher.connector import resource
-from s3_publisher.uploader import upload
-from s3_publisher.eraser import erase
+from s3push.connector import resource
+from s3push.uploader import upload
+from s3push.eraser import erase
 
 
 parser = argparse.ArgumentParser(

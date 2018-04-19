@@ -1,10 +1,10 @@
-# s3-publisher
+# s3push
 
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/91264fd782414d7c8c40d7e2dbc4254a)](https://www.codacy.com/app/vagiz.d/s3-publisher?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=vduseev/s3-publisher&amp;utm_campaign=Badge_Grade)
-[![CircleCI](https://circleci.com/gh/vduseev/s3-publisher/tree/master.svg?style=shield)](https://circleci.com/gh/vduseev/s3-publisher/tree/master)
-[![PyPI version](https://badge.fury.io/py/s3-publisher.svg)](https://badge.fury.io/py/s3-publisher)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/91264fd782414d7c8c40d7e2dbc4254a)](https://www.codacy.com/app/vagiz.d/s3push?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=vduseev/s3push&amp;utm_campaign=Badge_Grade)
+[![CircleCI](https://circleci.com/gh/vduseev/s3push/tree/master.svg?style=shield)](https://circleci.com/gh/vduseev/s3push/tree/master)
+[![PyPI version](https://badge.fury.io/py/s3push.svg)](https://badge.fury.io/py/s3push)
 
-Upload whole directories or distinct files to AWS S3 using `s3publish` in command line. Extensive support for different credential sources.
+Upload whole directories or distinct files to AWS S3 using `s3push` in command line. Extensive support for different credential sources.
 
 ## Project goal
 
@@ -20,34 +20,34 @@ The project will, however, continue to exist as a demonstration of continuous de
 
 Recommended installation method is via Pipenv:
 ```console
-pipenv install s3-publisher
+pipenv install s3push
 ```
 
 Installing via Pip instead of Pipenv:
 ```console
-pip install s3-publisher
+pip install s3push
 ```
 
 ## Usage
 
 **Publish a directory with default credentials**
 ```console
-s3publish ~/my-website/ example.com
+s3push ~/my-website/ example.com
 ```
 
 **Publish a file using default credentials**
 ```console
-s3publish ~/my-website/index.html example.com
+s3push ~/my-website/index.html example.com
 ```
 
 **Publish with provided key pair**
 ```console
-s3publish ~/my-website/ example.com -k XXXXXXXXXXXXXXXXXXXX -s xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+s3push ~/my-website/ example.com -k XXXXXXXXXXXXXXXXXXXX -s xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 ```
 
 **Publish with saved profile by providing its name**
 ```console
-s3publish ~/my-website/ example.com -p my-deployment-profile
+s3push ~/my-website/ example.com -p my-deployment-profile
 ```
 
 **Note**: see [all possible](#priority-of-credentials-providers) options for specifying credentials below.
