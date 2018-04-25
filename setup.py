@@ -2,19 +2,30 @@ from setuptools import setup, find_packages
 
 from os import path
 from codecs import open
+from datetime import date
 
-here = path.abspath(path.dirname(__file__))
+
+def local_path(filename):
+    return path.join(
+        path.abspath(path.dirname(__file__)),
+        filename)
 
 # Get the long description from the README file
-with open(path.join(here, 'README.md'), encoding='utf-8') as f:
-    long_description = f.read()
+with open(local_path('README.md'), encoding='utf-8') as readme:
+    long_description = readme.read()
 
-# with open(os.path.join(mypackage_root_dir, 'VERSION')) as version_file:
-    # version = version_file.read().strip()
+# .build.info file must exist in the current directory and the
+# build should fail if it does not.
+# The file must contain build number in it.
+with open(local_path('.build.info')) as build_info:
+    build_number = build_info.read().strip()
+
+today = date.today()
+version = '{}.{}.{}'.format(today.year, today.month, build_number)
 
 setup(
     name='s3push',
-    version='1.0.0b3',
+    version=version,
     description='Upload directories to AWS S3',
     long_description=long_description,
     long_description_content_type='text/markdown',

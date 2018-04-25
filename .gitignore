@@ -1,5 +1,6 @@
 .idea
 .python-version
+.build.info
 build
 dist
 *.egg-info
