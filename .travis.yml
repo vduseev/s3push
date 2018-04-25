@@ -8,6 +8,7 @@ install:
   - pipenv install --dev
   
 script:
+  - echo $TRAVIS_BUILD_NUMBER > .build.info
   - python setup.py bdist_wheel
   - pipenv install --dev -e . 
 
