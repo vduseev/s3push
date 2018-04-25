@@ -46,6 +46,7 @@ jobs:
       - run:
           name: build
           command: |
+            echo $CIRCLE_BUILD_NUM > .build.info
             python setup.py bdist_wheel
             pipenv install --dev -e .
 
