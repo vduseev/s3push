@@ -1,10 +1,14 @@
 # s3push
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/91264fd782414d7c8c40d7e2dbc4254a)](https://www.codacy.com/app/vagiz.d/s3push?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=vduseev/s3push&amp;utm_campaign=Badge_Grade)
-[![CircleCI](https://circleci.com/gh/vduseev/s3push/tree/master.svg?style=shield)](https://circleci.com/gh/vduseev/s3push/tree/master)
 [![PyPI version](https://badge.fury.io/py/s3push.svg)](https://badge.fury.io/py/s3push)
 
 Upload whole directories or distinct files to AWS S3 using `s3push` in command line. Extensive support for different credential sources.
+
+| Branch | Travis-CI Status | CircleCI Status |
+| - | - | - |
+| master | [![Build Status](https://travis-ci.org/vduseev/s3push.svg?branch=master)](https://travis-ci.org/vduseev/s3push) | [![CircleCI](https://circleci.com/gh/vduseev/s3push/tree/master.svg?style=shield)](https://circleci.com/gh/vduseev/s3push/tree/master) |
+| dev | [![Build Status](https://travis-ci.org/vduseev/s3push.svg?branch=dev)](https://travis-ci.org/vduseev/s3push) | [![CircleCI](https://circleci.com/gh/vduseev/s3push/tree/dev.svg?style=shield)](https://circleci.com/gh/vduseev/s3push/tree/dev) |
 
 ## Project goal
 
@@ -14,7 +18,7 @@ However, the tool has been written after a very quick research and, as a result,
 
 As a **project's post-mortem**, it can be concluded that a proper research must be performed prior to the start of development. For example, before developing a new library or a tool it may be very useful to make a simple feature set comparison.
 
-The project will, however, continue to exist as a demonstration of continuous delivery setup for a python package development. The environment for the project is designed to support fully automated releases and testing. 
+The project will, however, continue to exist as a demonstration of continuous delivery setup for a python package development. The environment for the project is designed to support fully automated releases and testing.
 
 ## Installation
 
